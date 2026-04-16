@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>五代.宋
+    </title>
+</head>
+<style>
+    .img {
+            width: 80px;
+            height: 50px;
+            position: absolute;
+            background-image: url('img/鼠标跟随.png'); /* 确保路径正确 */
+            background-size: cover;
+            background-repeat: no-repeat;
+            left: 0;
+            top: 0;
+            pointer-events: none; /* 防止图片遮挡其他元素的点击事件 */
+            z-index: 999; /* 确保图片在最上层 */
+        }
+    .cta {
+  position: absolute;
+  bottom: 8%;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  z-index: 1;
+}
+
+.cta button {
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.8);
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 50px;
+  height: 50px;
+  width: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.cta button:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+  color:rgb(53, 53, 53);
+}
+
+    * {
+        padding: 0;
+        margin: 0;
+    }
+    .shell{
+        height: 100vh;
+        overflow-x: hidden;
+        perspective: 3px;
+    }
+    .shell div{
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-style: 30px;
+        letter-spacing: 2px;
+    }
+    .image{
+        transform: translateZ(-1px) scale(1.6);
+        background-size: cover;
+        height: 100vh;
+        z-index: -1;
+    }
+    .text{
+        height: 50vh;
+        background-color: #fff;
+    }
+    .text h1{
+        color: #000;
+        margin-left: 150px;
+        margin-right:150px;
+    }
+    .heading{
+        z-index: -1;
+        transform: translateY(-30vh) translateZ(1px);
+        color: #fff;
+        font-size: 50px;
+        letter-spacing: 10px;
+    }
+</style>
+
+<body>
+    <div class="img"></div>
+    <div class="shell">
+        <div class="image" style="background-image: url('img/五代.宋/1.png');"></div>
+        <div class="heading">
+            <h1>五代.宋</h1>
+        </div>
+        <div class="text">
+            <h1>五代时期壁画在艺术风格上也有所变化，受到中原两宋画风的影响，构图更加灵活多样，既有对称平衡的严谨布局，也有自由奔放的构图方式，使得画面更加生动和富有表现力。</h1>
+        </div>
+
+        <div class="image" style="background-image: url('img/五代.宋/2.png');"></div>
+        <div class="heading">
+            <h1>第八九窟 北壁</h1>
+        </div>
+        <div class="text">
+            <h1>所绘水月观音、文殊变、普贤变，无论人物造型、山石云气，线描赋色、结构布局、意境神韵都是不可多得的艺术佳作。与此同时受藏传密教艺术的影响，曼陀罗、五方佛、明王、金刚等藏传佛教题材增多。</h1>
+        </div>
+
+        <div class="image" style="background-image: url('img/五代.宋/3.png');"></div>
+        <div class="heading">
+            <h1>第九八窟 北壁</h1>
+        </div>
+        <div class="text">
+            <h1>五代图案继承唐代余风，多绘团龙藻井，井心莲花中多绘团龙，井外多卷草纹，回纹边饰。宋与西夏浮塑施金的团龙藻井，有一龙、二龙、四龙、五龙。还有团花藻井，花中画交杵和法轮，井外边饰以回纹、卷草纹、白珠纹为主，元代除沿袭西夏遗风，还有井心绘六字真言，大日如来等。</h1>
+        </div>
+
+        <div class="image" style="background-image: url('img/五代.宋/4.png');"></div>
+        <div class="heading">
+            <h1>第三六窟 南壁</h1>
+        </div>
+        <div class="text">
+            <h1>五代、宋时期供养人数量进一步增加，形象更为高大。曹氏归义军政权一门五代及其姻亲、显官、属吏，还有与曹氏联姻的于阗国王、王后，甘州回鹘公主，均与入壁。</h1>
+        </div>
+
+        <div class="image" style="background-image: url('img/五代.宋/5.png');"></div>
+        <div class="heading">
+            <h1></h1>
+        </div>
+        
+        <div class="cta">
+            <button onclick="window.location.href='历代遗韵.html'">
+              返回上一页
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+    </div>
+</body>
+<script>
+    let img = document.querySelector('.img');
+       let imgl = 0, imgt = 0;
+
+       // 设置平滑移动的动画循环
+       function moveImage() {
+           requestAnimationFrame(moveImage);
+
+           // 获取鼠标在整个文档中的位置
+           let mouseX = window.mouseX || 0;
+           let mouseY = window.mouseY || 0;
+
+           // 计算图片的目标位置
+           let targetX = mouseX - img.clientWidth / 2;
+           let targetY = mouseY - img.clientHeight / 2;
+
+           // 平滑移动逻辑
+           imgl += (targetX - imgl) * 0.1; // 缓慢接近目标 X
+           imgt += (targetY - imgt) * 0.1; // 缓慢接近目标 Y
+
+           // 更新图片位置
+           img.style.left = imgl + "px";
+           img.style.top = imgt + "px";
+
+           // 计算旋转角度
+           let imgx = mouseX - (img.offsetLeft + img.clientWidth / 2);
+           let imgy = mouseY - (img.offsetTop + img.clientHeight / 2);
+           let deg = 360 * Math.atan(imgy / imgx) / (2 * Math.PI);
+
+           // 判断是否需要翻转
+           let y = img.offsetLeft < mouseX ? -180 : 0;
+
+           // 设置小图片的旋转和翻转
+           img.style.transform = "rotateZ(" + deg + "deg) rotateY(" + y + "deg)";
+       }
+
+       // 初始化动画循环
+       moveImage();
+
+       // 监听鼠标移动事件
+       window.addEventListener('mousemove', function (event) {
+           // 更新全局鼠标位置
+           window.mouseX = event.pageX;
+           window.mouseY = event.pageY;
+       });
+   
+</script>
+
+</html>

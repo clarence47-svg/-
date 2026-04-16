@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>服饰</title>
+    <style>
+        .cta {
+            position: fixed;
+            bottom: 8%;
+            left: 20px;
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            z-index: 1;
+        }
+
+        .cta button {
+            font-size: 15px;
+            font-weight: 400;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.8);
+            background-color: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            border-radius: 50px;
+            height: 50px;
+            width: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.2s;
+            cursor: pointer;
+            transform: rotate(0deg);
+        }
+
+        .cta button:hover {
+            background-color: rgba(255, 255, 255, 0.8);
+            color: rgb(53, 53, 53);
+        }
+
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            background-color: rgb(60, 60, 70);
+            display: flex;
+            justify-content: center;
+        }
+
+        .a {
+            width: 1100px;
+            height: 400px;
+            position: relative;
+            top: 80px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            box-shadow: 5px 5px 15px #000;
+        }
+
+        .b {
+            transition: .7s;
+            overflow: hidden;
+        }
+
+        .b:hover {
+            flex-shrink: 0;
+            flex-grow: 0;
+        }
+
+        img {
+            width: 400px;
+        }
+
+        body {
+            background-color: rgb(60, 60, 70);
+            background-image: url('img/背景 冷色.png');
+            /* 添加背景图片路径 */
+            background-size: cover;
+            /* 背景图片根据屏幕大小自动调整尺寸 */
+            background-position: center;
+            /* 图片居中显示 */
+            background-repeat: no-repeat;
+            /* 防止图片重复 */
+            display: flex;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            filter: blur(10px);
+            /* 模糊效果 */
+            z-index: -1;
+            /* 背景层在最底层 */
+            transform: scale(1.1);
+            /* 调整模糊边缘 */
+            background-image: var(--bg-image, none);
+            /* 默认无背景 */
+        }
+
+        .text-container {
+            text-align: center;
+
+        }
+        .left-text {
+            position: absolute;
+            width:1100px;
+            left: 185px;
+            top: 600px;
+            transform: translateY(-50%);
+            z-index: 1;
+            color: white;
+            text-align: left;
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 18px;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+
+<body>
+        <div class="a">
+            <div class="b"><img src="img/服饰/12.png"></div>
+            <div class="b"><img src="img/服饰/10.png"></div>
+            <div class="b"><img src="img/服饰/4.png"></div>
+            <div class="b"><img src="img/服饰/5.png"></div>
+            <div class="b"><img src="img/服饰/14.png"></div>
+            <div class="b"><img src="img/服饰/11.png"></div>
+            <div class="b"><img src="img/服饰/8.png"></div>
+        </div>
+        <div class="cta">
+            <button onclick="window.location.href='色彩交融.html'">
+                返回上一页
+                <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+        <div class="left-text">
+            <p>十六国至北周时期的敦煌石窟壁画和彩塑多以土红为底，饱满热烈。佛教人物的服饰受到印度和波斯的影响，而世俗人物的服饰多带有魏晋时期褒衣博带、曲裾飞髾的飘逸之感，袴褶的流行为隋唐服饰多元化奠定基础，服饰图案以忍冬纹和几何纹为主。
+                隋唐时期是敦煌石窟艺术发展的鼎盛时期，隋代壁画和彩塑人物造型颀长，服饰风格承上启下，注重面料图案和质感的表现，显示了由朴实简约向奢华盛装过渡的特点，以及当时染织工艺的交流和提高。
+                
+            敦煌石窟的整体发展在五代之后步入后期，艺术的创造力和感染力逐渐减弱，许多壁画和彩塑造像出现了程式化的现象，用色比较单纯沉稳、淡雅素净。但对于服饰文化来说，这段时间却是异彩纷呈、百花争艳。女供养人像身着由钿钗、大袖衫、长裙、帔帛所组成的花钗礼服，反映了当时贵族妇女沿袭唐代且更加繁缛、奢华的服饰风格。</p>
+        </div>
+
+</body>
+<script>
+    // 获取所有图片容器
+    const images = document.querySelectorAll('.b img');
+
+    // 设置初始背景为第一张图片
+    const defaultBgSrc = images[0].getAttribute('src');
+    document.body.style.setProperty('--bg-image', `url(${defaultBgSrc})`);
+
+    // 遍历每个图片容器，添加鼠标悬停事件
+    images.forEach(img => {
+        img.parentElement.addEventListener('mouseenter', () => {
+            // 获取当前图片的路径
+            const imgSrc = img.getAttribute('src');
+            // 更新背景图片
+            document.body.style.setProperty('--bg-image', `url(${imgSrc})`);
+        });
+    });
+</script>
+
+</html>

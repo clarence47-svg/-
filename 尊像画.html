@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>尊像画</title>
+    <style>
+        
+           .cta {
+  position: fixed;
+  bottom: 8%;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  z-index: 999;
+}
+
+.cta button {
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.8);
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 50px;
+  height: 50px;
+  width: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.cta button:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+  color:rgb(53, 53, 53);
+}
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 100vw;
+            height: 150vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position:relative;
+        }
+        :root {
+    --bg-img: url(img/尊像画/1.png); /* 替换为实际的默认背景图片路径 */
+}
+
+        body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1; /* 确保背景在内容之下 */
+    background-size: cover;
+    background-position: center;
+    background-image:var(--bg-img); /* 设置默认背景图片 */
+    filter: blur(10px); /* 模糊效果 */
+}
+
+
+        .shell {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card {
+            width: 270px;
+            height: 100px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            padding: 0 25px;
+            perspective: 1000px;
+            transition: all 0.4s;
+            margin: 0px 35px ;
+        }
+
+        .cover-image {
+            width: 100%;
+            height: 100%;
+        }
+
+        .wrapper {
+            transition: all 0.3s;
+            position: absolute;
+            width: 100%;
+            z-index: -1;
+        }
+
+        .card:hover .wrapper {
+            transform: perspective(900px) translateY(-5%) rotateX(25deg) translateZ(0);
+            box-shadow: 2px 35px 32px -8px rgba(0, 0, 0, 0.75);
+        }
+
+        .card:hover::before {
+    content: '';
+    position: fixed; /* 绝对定位, 覆盖整个视窗 */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1; /* 确保背景在内容之下 */
+    background-size: cover;
+    background-position: center;
+    background-image: var(--bg-img);
+}
+
+        .wrapper::before,
+        .wrapper::after {
+            content: "";
+            opacity: 0;
+            width: 100%;
+            height: 80px;
+            transition: all 0.3s;
+            position: absolute;
+            left: 0;
+        }
+
+        .wrapper::before {
+            top: 0;
+            height: 100%;
+            background-image: linear-gradient(to top,
+                    transparent 46%,
+                    rgba(12, 13, 19, 0.5) 68%,
+                    rgba(12, 13, 19) 97%);
+        }
+
+        .wrapper::after {
+            bottom: 0;
+            opacity: 1;
+            background-image: linear-gradient(to bottom,
+                    transparent 46%,
+                    rgba(12, 13, 19, 0.5) 68%,
+                    rgba(12, 13, 19) 97%);
+        }
+
+        .card:hover .wrapper::before,
+        .wrapper::after {
+            opacity: 1;
+        }
+
+        .card:hover .wrapper::after {
+            height: 120px;
+        }
+
+        .title {
+            width: 100%;
+            transition: transform 0.3s;
+        }
+
+        .card:hover .title {
+            transform: translate3d(0%, -50px, 100px);
+        }
+
+        .character {
+            width: 100%;
+            opacity: 0;
+            transition: all 0.3s;
+            position: absolute;
+            z-index: -1;
+        }
+
+        .card:hover .character {
+            opacity: 1;
+            transform: translate3d(0%, -20%, 100px);
+        }
+
+        .card:hover {
+            transform: translateY(40px);
+            --bg--img:url(img/尊像画/1.png);
+        }
+        
+    </style>
+</head>
+
+<body>
+
+    <div class="shell">
+        <div class="card" data-background="img/尊像画/7.png">
+            <div class="wrapper">
+                <img src="img/尊像画/7.png" alt="" class="cover-image">
+            </div>
+           <img src="img/尊像画/1-2.png" alt="" class="title">
+            <img src="img/尊像画/7-2.png" alt="" class="character">
+        </div>
+
+        <div class="card" data-background="img/尊像画/3.png">
+            <div class="wrapper">
+                <img src="img/尊像画/3.png" alt="" class="cover-image">
+            </div>
+            <img src="img/尊像画/1-1.png" alt="" class="title">
+            <img src="img/尊像画/3-2.png" alt="" class="character">
+        </div>
+        <div class="card" data-background="img/尊像画/4.png">
+            <div class="wrapper">
+                <img src="img/尊像画/4.png" alt="" class="cover-image">
+            </div>
+            <img src="img/尊像画/1-3.png" alt="" class="title">
+            <img src="img/尊像画/4-2.png" alt="" class="character">
+        </div>
+        <div class="card" data-background="img/尊像画/5.png">
+            <div class="wrapper">
+                <img src="img/尊像画/5.png" alt="" class="cover-image">
+            </div>
+            <img src="img/尊像画/1-4.png" alt="" class="title">
+            <img src="img/尊像画/5-2.png" alt="" class="character">
+        </div>
+    </div>
+    <div class="cta">
+        <button onclick="window.location.href='色彩交融.html'">
+          返回上一页
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+
+
+</body>
+<script>
+   document.addEventListener("DOMContentLoaded", function() {
+    // 设置第一个卡片的背景图片为初始背景
+    var cards = document.querySelectorAll('.card');
+    if(cards.length > 0) {
+        var defaultBackground = cards[0].getAttribute('data-background');
+        document.documentElement.style.setProperty('--bg-img', 'url(' + defaultBackground + ')');
+    }
+
+    // 鼠标悬停时更改背景图片
+    cards.forEach(function(card) {
+        card.addEventListener('mouseenter', function() {
+            var backgroundUrl = this.getAttribute('data-background');
+            document.documentElement.style.setProperty('--bg-img', 'url(' + backgroundUrl + ')');
+        });
+
+        // 可选：当鼠标离开所有卡片时，恢复到初始背景（如果需要）
+        card.addEventListener('mouseleave', function() {
+            document.documentElement.style.setProperty('--bg-img', 'url(' + defaultBackground + ')');
+        });
+    });
+});
+</script>
+</html>

@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>色彩交融</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .shell {
+            width: 100%;
+            position: relative;
+            padding: 80px 0;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+
+        .shell:before {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(99, 99, 99, 0.8);
+            content: "";
+        }
+
+        .header {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 80px;
+            position: relative;
+        }
+
+        .title {
+            color: #fff;
+            font-size: 46px;
+            font-weight: normal;
+            margin: 0;
+            font-family: '华文中宋';
+        }
+
+        .timeline {
+            display: flex;
+            margin: 0 auto;
+            flex-wrap: wrap;
+            flex-direction: column;
+            max-width: 700px;
+            position: relative;
+        }
+
+        .content-title {
+            font-weight: normal;
+            font-size: 35px;
+            margin: -10px 0 0 0;
+            transition: 0.4s;
+            padding: 0 10px;
+            box-sizing: border-box;
+            color: #fff;
+            font-family: '华文中宋';
+            position: absolute;
+            z-index: 999;
+        }
+
+        .content-desc {
+            margin: 0;
+            font-size: 18px;
+            box-sizing: border-box;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 25px;
+            font-family: '华文中宋';
+        }
+
+        .timeline:before {
+            position: absolute;
+            left: 50%;
+            width: 2px;
+            height: 100%;
+            margin-left: -1px;
+            content: "";
+            background: rgba(255, 255, 255, 0.07);
+        }
+
+        .item {
+            padding: 40px 0;
+            opacity: 0.3;
+            filter: blur(2px);
+            transition: 0.5s;
+            box-sizing: border-box;
+            width: calc(50% - 40px);
+            display: flex;
+            position: relative;
+            transform: translateY(-80px);
+        }
+
+        .item:before {
+    
+            /* 设置在伪元素before中的内容品 */
+            content: attr(data-text);
+            letter-spacing: 2px;
+            width: 100%;
+            position: absolute;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 15px;
+            border-left: 2px solid rgba(255, 255, 255, 0.5);
+            top: 70%;
+            margin-top: -5px;
+            padding-left: 15px;
+            opacity: 0;
+            right: calc(-100% - 56px);
+            font: 900 19px '';
+            letter-spacing: 2px;
+            font-family: '华文中宋';
+        }
+
+        .item:nth-child(even) {
+            align-self: flex-end;
+        }
+
+        .item:nth-child(even):before {
+            right: auto;
+            text-align: right;
+            left: calc(-100% - 56px);
+            padding-left: 0;
+            border-left: none;
+            border-right: 2px solid rgba(255, 255, 255, 0.5);
+            padding-right: 15px;
+        }
+
+        .item--active {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0px);
+        }
+
+        .item--active:before {
+            top: 50%;
+            transition: 0.3s all 0.2s;
+            opacity: 1;
+        }
+
+        .item--active .content-title {
+            margin: -50px 0 20px 0;
+        }
+
+        .img {
+            max-width: 100%;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .subtitle {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 16px;
+            letter-spacing: 5px;
+            margin: 10px 0 0 0;
+            font-weight: normal;
+            font-family: '华文中宋';
+        }
+
+        .footer {
+            padding: 95px 0;
+            text-align: center;
+        }
+
+        .footer a {
+            color: #999;
+            display: inline-block;
+        }
+
+        @media only screen and (max-width: 767px) {
+            .item {
+                align-self: baseline !important;
+                width: 100%;
+                padding: 0 30px 150px 80px;
+            }
+
+            .item:before {
+                left: 10px !important;
+                padding: 0 !important;
+                top: 50px;
+                text-align: center !important;
+                width: 60px;
+                border: none !important;
+            }
+
+            .item:last-child {
+                padding-bottom: 40px;
+            }
+        }
+
+        @media only screen and (max-width: 767px) {
+            .timeline:before {
+                left: 40px;
+            }
+        }
+
+        .buttons {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .header {
+            position: relative;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 0 10px;
+            font-size: 16px;
+            background-color:transparent;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 10px;
+            font-family: '华文中宋';
+            border: #fff 0.5px solid;
+        }
+        
+
+        .button:hover {
+            background-color: rgba(255, 255, 255, 0.8);
+            color:black;
+        }
+        .img-wrapper {
+        position: relative;
+        display: inline-block;
+        overflow: hidden; /* 防止溢出 */
+    }
+
+    .img-wrapper img {
+        max-width: 100%;
+        cursor: pointer;
+        opacity: 1; /* 初始透明度 */
+        transform: scale(1); /* 初始缩放比例 */
+        transition: all 0.4s ease; /* 添加过渡效果 */
+        display: block;
+    }
+
+    /* 默认隐藏提示框 */
+    .img-wrapper::after {
+        content: "点击查看详情";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: transparent;
+        color: #ffffff;
+        font-size: 20px;
+        padding: 5px 10px;
+        border-radius: 5px;
+        white-space: nowrap;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease;
+    }
+
+    /* 鼠标悬停时显示提示框 */
+    .img-wrapper:hover::after {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /* 鼠标悬停时图片效果 */
+    .img-wrapper:hover img {
+        
+        filter: blur(5px); /* 最后模糊 */
+    }
+    </style>
+    <style>
+        .return-button {
+            background-color:transparent;
+            color:white;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-family: '华文中宋';
+            border: 0.5px solid white;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+        .return-button:hover {
+            background-color: rgba(255, 255, 255, 0.8);
+            color:black;
+        }
+    </style>
+</head>
+
+<body>
+    </div>
+    <div class="shell" id="shell" style="background-image: url(&quot;./img/01.jpg&quot;);">
+        <div class="header">
+            <h2 class="title">色彩交融</h2>
+            <h3 class="subtitle">感受千年敦煌之美</h3>
+            <div class="buttons">
+                
+                <a class="button" href="历代遗韵.html">历代遗韵</a>
+            </div>
+        </div>
+
+        <div class="timeline">
+
+            <div class="item" data-text="虔心献供古佛前 尘世慈悲一线牵">
+                <div class="content">
+                    <div class="img-wrapper">
+                    <img class="img" src="img/供养人/1.png" onclick="window.location.href='供养人.html'">
+                </div>
+                    <h2 class=" content-title ">供养人</h2>
+                    <p class="content-desc ">
+                        供养人，是指因信仰某种宗教，通过提供资金、物品或劳力，制作圣像、开凿石窟、修建宗教场所等形式弘扬教义的虔诚信徒。今天，也指那些出资对其他人提供抚养、赡养等时段性主要资助的个人或团体。
+                    </p>
+                </div>
+            </div>
+
+            <div class="item " data-text="庄严法相慈悲目 笔底生辉见佛光">
+                <div class="content ">
+                    <div class="img-wrapper">
+                    <img class="img " src="img/尊像画/1.png " onclick="window.location.href='尊像画.html'">
+                    </div>
+                    <h2 class="content-title ">尊像画</h2>
+                    <p class="content-desc ">
+                        尊像画是中国和日本学者应用的术语，指各类佛的说法图和说法像，以及各类菩萨、声闻、弟子、诸天护法神像等。
+                    </p>
+                </div>
+            </div>
+
+
+            <div class="item " data-text="锦绣罗衣映彩霞 千年风尚话桑麻">
+                <div class="content ">
+                    <div class="img-wrapper">
+                    <img class="img " src="img/服饰/1.png " onclick="window.location.href='服饰.html'">
+                    </div>
+                    <h2 class="content-title ">服饰</h2>
+                    <p class="content-desc ">
+                        敦煌壁画中的衣冠服饰，有供养人服饰、故事画、经变画、史迹画中世俗人物服饰、佛国人物服饰等。从北朝至宋元，时代跨越千年。为观者了解古代服饰演变的概况，提供了形象的图像资料。
+                </div>
+            </div>
+
+
+            <div class="item " data-text="舞袖飘然上九霄 飞天花雨绕琼瑶">
+                <div class="content ">
+                    <div class="img-wrapper">
+                    <img class="img " src="img/飞天/1.png" onclick="window.location.href='飞天.html'">
+                    </div>
+                    <h2 class="content-title ">飞天</h2>
+                    <p class="content-desc ">
+                        飞天是佛教造型艺术，它从印度经过西域传到中国内地，经过了一千多年的演变和发展，日渐完美，形成了中国化的造型。由于它的题材，表现方式具有很高的艺术情趣，所以时代相传，为人们所喜爱，以至超出佛教的意义，而成为一种祥瑞的象征。
+                    </p>
+                </div>
+            </div>
+
+            <div class="item " data-text="山高水长入画来 墨香凝翠染云台">
+                <div class="content ">
+                    <div class="img-wrapper">
+                    <img class="img " src="img/山水画/1.png " onclick="window.location.href='山水画.html'">
+                    </div>
+                    <h2 class="content-title ">山水画</h2>
+                    <p class="content-desc ">
+                        在敦煌石窟壁画中保存的山水画面，绚丽多姿，数量可观，从中不仅可以观赏到古代山水实例，还可以探寻北朝至元代一千年间石窟壁画中山水画发展演变的过程。
+                    </p>
+                </div>
+            </div>
+
+            <div class="item " data-text="穹顶藻井雕龙凤 星汉灿烂夜未央">
+                <div class="content ">
+                    <div class="img-wrapper">
+                    <img class="img " src="img/藻井/1.png " onclick="window.location.href='藻井.html'">
+                    </div>
+                    <h2 class="content-title ">藻井</h2>
+                    <p class="content-desc ">
+                        藻井是中国传统建筑中一种装饰华丽的穹窿状天花板结构，常见于宫殿、寺庙等建筑的顶部，具有象征尊贵与宗教意义的艺术特色。
+                    </p>
+                </div>
+            </div>
+
+
+            <iframe src="music_player.html" style="display:none;"></iframe>
+
+            <div class="footer">
+                <button class="return-button" onclick="goToHome()">返回首页</button>
+
+                <script>
+                    function goToHome() {
+                        window.location.href = "index.html";
+                    }
+                </script>
+            </div>
+        </div>
+
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js">
+        </script>
+
+        <script>
+            (function ($) {
+                $.fn.timeline = function () {
+                    var selectors = {
+                        id: $(this),
+                        item: $(this).find(".item"),
+                        activeClass: "item--active",
+                        img: ".img"
+                    };
+            
+                    // 将第一个时间轴项目激活，并设置时间轴背景图片为第一个项目的图片
+                    selectors.item.eq(0).addClass(selectors.activeClass);
+                    selectors.id.css(
+                        "background-image",
+                        "url(" +
+                        selectors.item
+                            .first()
+                            .find(selectors.img)
+                            .attr("src") +
+                        ")"
+                    );
+                    // 获取时间轴项目的总数
+                    var itemLength = selectors.item.length;
+                    // 当页面滚动时，触发滚动事件
+                    $(window).scroll(function () {
+                        var max, min;
+                        // 获取页面滚动的距离
+                        var pos = $(this).scrollTop();
+                        selectors.item.each(function (i) {
+                            // 获取当前时间轴项目的最小和最大高度
+                            min = $(this).offset().top;
+                            max = $(this).height() + $(this).offset().top;
+                            var that = $(this);
+                            // 如果滚动到最后一个项目，并且超过了当前项目高度的一半，
+                            // 则将最后一个项目设置为激活状态，并设置背景图片为最后一个项目的图片
+                            if (i == itemLength - 2 && pos > min + $(this).height() / 2) {
+                                selectors.item.removeClass(selectors.activeClass);
+                                selectors.id.css(
+                                    "background-image",
+                                    "url(" +
+                                    selectors.item
+                                        .last()
+                                        .find(selectors.img)
+                                        .attr("src") +
+                                    ")"
+                                );
+                                selectors.item.last().addClass(selectors.activeClass);
+                            }
+                            // 如果当前滚动位置在当前项目的最小和最大高度之间，
+                            // 则将当前项目设置为激活状态，并设置背景图片为当前项目的图片
+                            else if (pos <= max - 10 && pos >= min) {
+                                selectors.id.css(
+                                    "background-image",
+                                    "url(" +
+                                    $(this)
+                                        .find(selectors.img)
+                                        .attr("src") +
+                                    ")"
+                                );
+                                selectors.item.removeClass(selectors.activeClass);
+                                $(this).addClass(selectors.activeClass);
+                            }
+                        });
+                    });
+                };
+            })(jQuery)
+            /*
+            最后，我们调用 timeline 插件并传入时间轴的 ID 作为参数。
+            这将启用时间轴插件并为该时间轴绑定滚动事件。
+            */
+            $("#shell").timeline();
+        </script>
+</body>
+
+</html>

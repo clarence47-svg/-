@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>西魏
+    </title>
+</head>
+<style>
+     .img {
+            width: 80px;
+            height: 50px;
+            position: absolute;
+            background-image: url('img/鼠标跟随.png'); /* 确保路径正确 */
+            background-size: cover;
+            background-repeat: no-repeat;
+            left: 0;
+            top: 0;
+            pointer-events: none; /* 防止图片遮挡其他元素的点击事件 */
+            z-index: 999; /* 确保图片在最上层 */
+        }
+    .cta {
+  position: absolute;
+  bottom: 8%;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  z-index: 1;
+}
+
+.cta button {
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.8);
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 50px;
+  height: 50px;
+  width: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.cta button:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+  color:rgb(53, 53, 53);
+}
+
+    * {
+        padding: 0;
+        margin: 0;
+    }
+    .shell{
+        height: 100vh;
+        overflow-x: hidden;
+        perspective: 3px;
+    }
+    .shell div{
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-style: 30px;
+        letter-spacing: 2px;
+    }
+    .image{
+        transform: translateZ(-1px) scale(1.6);
+        background-size: cover;
+        height: 100vh;
+        z-index: -1;
+    }
+    .text{
+        height: 50vh;
+        background-color: #fff;
+    }
+    .text h1{
+        color: #000;
+        margin-left: 150px ;
+        margin-right: 150px;
+    }
+    .heading{
+        z-index: -1;
+        transform: translateY(-30vh) translateZ(1px);
+        color: #fff;
+        font-size: 50px;
+        letter-spacing: 10px;
+    }
+</style>
+
+<body>
+    <div class="img"></div>
+    <div class="shell">
+        <div class="image" style="background-image: url('img/西魏/1.png');"></div>
+        <div class="heading">
+            <h1>西魏</h1>
+        </div>
+        <div class="text">
+            <h1>故事画是敦煌早期艺术中一个重要内容，主要有佛传、本生和因缘故事三种类型。这一时期，佛传、因缘故事画和本生故事画方面又出现了新的题材和内容，集中在第四三二窟和第四二八五窟这两个洞窟中。</h1>
+        </div>
+
+        <div class="image" style="background-image: url('img/西魏/2.png');"></div>
+        <div class="heading">
+            <h1>第四二三窟 北壁</h1>
+        </div>
+        <div class="text">
+            <h1>北壁出现以“三世思想”为基础的过去七佛说法图，也反映出当时人们心中“见世振兴佛法”和“死往生极乐”的强烈愿望，也有学者把这七铺理解为“过去佛十璃勒”的组合。</h1>
+        </div>
+
+        <div class="image" style="background-image: url('img/西魏/3.png');"></div>
+        <div class="heading">
+            <h1>第四二四窟 东壁</h1>
+        </div>
+        <div class="text">
+            <h1>维摩诘经变的出现是这一时期佛教题材的重大变化之一。维摩诘是佛教传入中国后，由中国人自己创造出的一个在家佛教徒形象，他既有中国传统文化人博学多才、潇洒从容的风范，又具有佛教高僧的精通教理、能言善辩的才能，集儒家、道家、佛家三家美学理想于一身，很受当时文人士大夫的喜爱，也是佛教艺术中最受欢迎的题材之一。</h1>
+        </div>
+
+        <div class="image" style="background-image: url('img/西魏/4.png');"></div>
+        <div class="heading">
+            <h1>第四二三窟 北壁</h1>
+        </div>
+
+        <div class="heading">
+            <h1></h1>
+        </div>
+        <div class="text">
+            <h1>这一时期佛教题材中最有创新意义的变化之一，就是早期密教神形形象的出现。在第二八五窟西壁上，首次出现其形象源自印度密教诸天的密教神形形象。第二八五窟西壁中央，内壁上，倚坐说法佛，其形象原本属于印度教诸天形象。</h1>
+        </div>
+
+        <div class="image" style="background-image: url('img/西魏/6.png');"></div>
+        <div class="heading">
+            <h1></h1>
+        </div>
+        
+        <div class="cta">
+            <button onclick="window.location.href='历代遗韵.html'">
+              返回上一页
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+    </div>
+</body>
+<script>
+    let img = document.querySelector('.img');
+       let imgl = 0, imgt = 0;
+
+       // 设置平滑移动的动画循环
+       function moveImage() {
+           requestAnimationFrame(moveImage);
+
+           // 获取鼠标在整个文档中的位置
+           let mouseX = window.mouseX || 0;
+           let mouseY = window.mouseY || 0;
+
+           // 计算图片的目标位置
+           let targetX = mouseX - img.clientWidth / 2;
+           let targetY = mouseY - img.clientHeight / 2;
+
+           // 平滑移动逻辑
+           imgl += (targetX - imgl) * 0.1; // 缓慢接近目标 X
+           imgt += (targetY - imgt) * 0.1; // 缓慢接近目标 Y
+
+           // 更新图片位置
+           img.style.left = imgl + "px";
+           img.style.top = imgt + "px";
+
+           // 计算旋转角度
+           let imgx = mouseX - (img.offsetLeft + img.clientWidth / 2);
+           let imgy = mouseY - (img.offsetTop + img.clientHeight / 2);
+           let deg = 360 * Math.atan(imgy / imgx) / (2 * Math.PI);
+
+           // 判断是否需要翻转
+           let y = img.offsetLeft < mouseX ? -180 : 0;
+
+           // 设置小图片的旋转和翻转
+           img.style.transform = "rotateZ(" + deg + "deg) rotateY(" + y + "deg)";
+       }
+
+       // 初始化动画循环
+       moveImage();
+
+       // 监听鼠标移动事件
+       window.addEventListener('mousemove', function (event) {
+           // 更新全局鼠标位置
+           window.mouseX = event.pageX;
+           window.mouseY = event.pageY;
+       });
+   
+</script>
+
+</html>

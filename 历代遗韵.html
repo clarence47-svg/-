@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>历代遗韵</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .shell {
+            width: 100%;
+            position: relative;
+            padding: 80px 0;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+
+        .shell:before {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(99, 99, 99, 0.8);
+            content: "";
+        }
+
+        .header {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 80px;
+            position: relative;
+        }
+
+        .title {
+            color: #fff;
+            font-size: 46px;
+            font-weight: normal;
+            margin: 0;
+            font-family: '华文中宋';
+        }
+
+        .timeline {
+            display: flex;
+            margin: 0 auto;
+            flex-wrap: wrap;
+            flex-direction: column;
+            max-width: 700px;
+            position: relative;
+        }
+
+        .content-title {
+            font-weight: normal;
+            font-size: 35px;
+            margin: -10px 0 0 0;
+            transition: 0.4s;
+            padding: 0 10px;
+            box-sizing: border-box;
+            color: #fff;
+            font-family: '华文中宋';
+            z-index: 9999;
+            opacity: 1;
+            position: absolute;
+        }
+
+        .content-desc {
+            margin: 0;
+            font-size: 18px;
+            box-sizing: border-box;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 25px;
+            font-family: '华文中宋';
+        }
+
+        .timeline:before {
+            position: absolute;
+            left: 50%;
+            width: 2px;
+            height: 100%;
+            margin-left: -1px;
+            content: "";
+            background: rgba(255, 255, 255, 0.07);
+        }
+
+        .item {
+            padding: 40px 0;
+            opacity: 0.3;
+            filter: blur(2px);
+            transition: 0.5s;
+            box-sizing: border-box;
+            width: calc(50% - 40px);
+            display: flex;
+            position: relative;
+            transform: translateY(-80px);
+        }
+
+        .item:before {
+
+            /* 设置在伪元素before中的内容品 */
+            content: attr(data-text);
+            letter-spacing: 3px;
+            width: 100%;
+            position: absolute;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 15px;
+            border-left: 2px solid rgba(255, 255, 255, 0.5);
+            top: 70%;
+            margin-top: -5px;
+            padding-left: 15px;
+            opacity: 0;
+            right: calc(-100% - 56px);
+            font: 900 20px '';
+            letter-spacing: 5px;
+            font-family: '华文中宋';
+        }
+
+        .item:nth-child(even) {
+            align-self: flex-end;
+        }
+
+        .item:nth-child(even):before {
+            right: auto;
+            text-align: right;
+            left: calc(-100% - 56px);
+            padding-left: 0;
+            border-left: none;
+            border-right: 2px solid rgba(255, 255, 255, 0.5);
+            padding-right: 15px;
+        }
+
+        .item--active {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0px);
+        }
+
+        .item--active:before {
+            top: 50%;
+            transition: 0.3s all 0.2s;
+            opacity: 1;
+        }
+
+        .item--active .content-title {
+            margin: -50px 0 20px 0;
+        }
+
+        .img {
+            max-width: 100%;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .subtitle {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 16px;
+            letter-spacing: 5px;
+            margin: 10px 0 0 0;
+            font-weight: normal;
+            font-family: '华文中宋';
+        }
+
+        .footer {
+            padding: 95px 0;
+            text-align: center;
+        }
+
+        .footer a {
+            color: #999;
+            display: inline-block;
+        }
+
+        @media only screen and (max-width: 767px) {
+            .item {
+                align-self: baseline !important;
+                width: 100%;
+                padding: 0 30px 150px 80px;
+            }
+
+            .item:before {
+                left: 10px !important;
+                padding: 0 !important;
+                top: 50px;
+                text-align: center !important;
+                width: 60px;
+                border: none !important;
+            }
+
+            .item:last-child {
+                padding-bottom: 40px;
+            }
+        }
+
+        @media only screen and (max-width: 767px) {
+            .timeline:before {
+                left: 40px;
+            }
+        }
+
+        .buttons {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .header {
+            position: relative;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 0 10px;
+            font-size: 16px;
+            background-color: transparent;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 10px;
+            font-family: '华文中宋';
+            border: #fff 0.5px solid;
+        }
+
+
+        .button:hover {
+            background-color: rgba(255, 255, 255, 0.8);
+            color: black;
+        }
+        .img-wrapper {
+        position: relative;
+        display: inline-block;
+        overflow: hidden; /* 防止溢出 */
+    }
+
+    .img-wrapper img {
+        max-width: 100%;
+        cursor: pointer;
+        opacity: 1; /* 初始透明度 */
+        transform: scale(1); /* 初始缩放比例 */
+        transition: all 0.4s ease; /* 添加过渡效果 */
+        display: block;
+    }
+
+    /* 默认隐藏提示框 */
+    .img-wrapper::after {
+        content: "点击查看详情";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: transparent;
+        color: #ffffff;
+        font-size: 20px;
+        padding: 5px 10px;
+        border-radius: 5px;
+        white-space: nowrap;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease;
+    }
+
+    /* 鼠标悬停时显示提示框 */
+    .img-wrapper:hover::after {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /* 鼠标悬停时图片效果 */
+    .img-wrapper:hover img {
+        
+        filter: blur(5px); /* 最后模糊 */
+    }
+    </style>
+    <style>
+        .return-button {
+            background-color: transparent;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-family: '华文中宋';
+            border: 0.5px solid white;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+
+        .return-button:hover {
+            background-color: rgba(255, 255, 255, 0.8);
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+    </div>
+    <div class="shell" id="shell" style="background-image: url(&quot;./img/01.jpg&quot;);">
+        <div class="header">
+            <h2 class="title">历代遗韵</h2>
+            <h3 class="subtitle">穿越千年丝绸之路</h3>
+            <div class="buttons">
+
+                <a class="button" href="色彩交融.html">色彩交融</a>
+            </div>
+        </div>
+
+        <div class="timeline">
+
+            <div class="item" data-text="敦煌北凉北魏艺术风格">
+                <div class="content">
+                    <div class="img-wrapper">
+                    <img class="img" src="img/北凉.北魏.png" onclick="window.location.href='北凉.北魏.html'">
+                </div>
+                    <h2 class=" content-title ">北凉.北魏</h2>
+                    <p class="content-desc ">
+                        北凉、北魏壁画，从题材上看，主要有四类：佛像画（包括佛、菩萨、天王、金刚力士、飞天、伎乐等形象），佛教故事画，装饰图案画，供养人画像。
+                    </p>
+                </div>
+            </div>
+
+            <div class="item item--active" data-text="兼容并蓄 融合中西">
+                <div class="content">
+                    <div class="img-wrapper">
+                    <img class="img" src="img/西魏.png" onclick="window.location.href='西魏.html'">
+                </div>
+                    <h2 class="content-title">西魏</h2>
+                    <p class="content-desc">
+                        敦煌艺术就大步跨入了一个兼容并蓄、融会中西的新时代。因为北魏鲜卑族汉化运动，西魏时期的莫高窟艺术无论从内容题材还是艺术风格方面，都呈现出一种丰富多彩、清新雅致的风貌。
+                    </p>
+                </div>
+            </div>
+
+
+
+            <div class="item " data-text="北周时期的敦煌书画艺术">
+                <div class="content ">
+                    <div class="img-wrapper">
+                    <img class="img " src="img/北周.png " onclick="window.location.href='北周.html'">
+                </div>
+                    <h2 class="content-title ">北周</h2>
+                    <p class="content-desc ">
+                        北周时期的敦煌壁画除了传统的佛教故事、佛像、菩萨像外，还出现了许多反映当时社会生活、历史事件、神话传说等内容的壁画。壁画的构图更加严谨，线条更加流畅，色彩更加鲜艳，形象更加生动。壁画中的人物形象，无论是佛像、菩萨，还是世俗人物，都更加注重细节的刻画，更加注重表现人物的性格和情感。
+                    </p>
+                </div>
+            </div>
+
+
+            <div class="item " data-text="融合中西成一家">
+                <div class="content ">
+                    <div class="img-wrapper">
+                    <img class="img " src="img/隋代.png " onclick="window.location.href='隋代.html'">
+                </div>
+                    <h2 class="content-title ">隋代</h2>
+                    <p class="content-desc ">
+                        隋朝大乘佛教的兴起，得到了佛教思想上的支持，因而被隋朝大力推行，所以隋文帝杨坚与佛教关系密切，仁寿元年，将上元年，将崇佛活动推向高潮，因此，短短的三十余年间，在莫高窟一地就建造了近七十个洞窟。
+                </div>
+            </div>
+
+            <div class="item " data-text="创新以代雄">
+                <div class="content ">
+                    <div class="img-wrapper">
+                    <img class="img " src="img/初唐.png " onclick="window.location.href='初唐.html'">
+                </div>
+                    <h2 class="content-title ">初唐</h2>
+                    <p class="content-desc ">
+                        敦煌藏经洞发现的写经中，唐经数量居第一位。中原传来的唐经，从武德二年开始，经过贞观、永徽，直到长安四年龙朔、总章、咸亨、上元、仪凤、永淳、文明、垂拱、天授、长寿、《阿弥陀经》、《维摩诘经》、《观无量寿经》、《药师经》、《宝雨经》、《弥勒经》、《法华经》、《金刚经》等为最多，这些写经就是壁画的底本或蓝本。
+                    </p>
+                </div>
+            </div>
+
+            <div class="item " data-text="汗尘迷净土 梦幻寄丹青">
+                <div class="content ">
+                    <div class="img-wrapper">
+                    <img class="img " src="img/盛唐.png " onclick="window.location.href='盛唐.html'">
+                </div>
+                    <h2 class="content-title ">盛唐</h2>
+                    <p class="content-desc ">
+                        盛唐时期的敦煌壁画是石窟壁画艺术的鼎盛时期，标志着敦煌壁画在历史的进程中历经三四百年的发展演变，已经完全形成自己的民族风格，是典型的中国化壁画的艺术典范。
+                    </p>
+                </div>
+            </div>
+
+
+            <div class="item " data-text="论吐蕃时期的敦煌书画艺术">
+                <div class="content ">
+                    <div class="img-wrapper">
+                    <img class="img " src="img/中唐.png " onclick="window.location.href='中唐.html'">
+                </div>
+                    <h2 class="content-title ">中唐</h2>
+                    <p class="content-desc ">
+                        中唐时期的敦煌壁画在艺术上展现出规模宏大和内容丰富的特点，经变画特别流行，成为壁画的主流。这一时期的壁画风格开始转变，更加注重写实，同时融合了西域和中原的画风，人物形象更接近现实，色彩丰富，线条流畅，增强了画面的表现力。
+                    </p>
+                </div>
+            </div>
+
+
+            <div class="item " data-text="变相多门意蕴乡情晚唐壁画">
+                <div class="content ">
+                    <div class="img-wrapper">
+                    <img class="img " src="img/晚唐.png " onclick="window.location.href='晚唐.html'">
+                </div>
+                    <h2 class="content-title ">晚唐</h2>
+                    <p class="content-desc ">
+                        晚唐时期的壁画色彩更加丰富多样，画家们善于运用多种颜色来表现不同的场景和人物，使得画面更加生动逼真。在人物造型方面，晚唐壁画中的人物形象更加贴近现实生活，比例更加协调，姿态更加自然，表现出高超的写实技巧。
+                    </p>
+                </div>
+            </div>
+
+
+            <div class="item " data-text="瓜沙曹氏画院的壁画艺术">
+                <div class="content ">
+                    <div class="img-wrapper">
+                    <img class="img " src="img/五代.宋.png " onclick="window.location.href='五代.宋.html'">
+                </div>
+                    <h2 class="content-title ">五代.宋</h2>
+                    <p class="content-desc ">
+                        五代宋时期的敦煌壁画在内容和形式上延续了唐代的传统，题材以大幅经变画为主。壁画中还出现了藏传密教题材，如曼陀罗、五方佛等，反映了多元文化的融合。
+                    </p>
+                </div>
+            </div>
+
+
+            <div class="item " data-text="民族艺术的奇葩">
+                <div class="content ">
+                    <div class="img-wrapper">
+                    <img class="img " src="img/西夏.元.png " onclick="window.location.href='西夏.元.html'">
+                </div>
+                    <h2 class="content-title ">西夏.元</h2>
+                    <p class="content-desc ">
+                        西夏元时期的敦煌壁画在艺术风格和内容上呈现出独特特点。西夏时期的壁画融合了汉、藏、回鹘等多民族文化元素，形成了独特的艺术风格。
+                </div>
+            </div>
+
+
+            <iframe src="music_player.html" style="display:none;"></iframe>
+
+            <div class="footer">
+                <button class="return-button" onclick="goToHome()">返回首页</button>
+
+                <script>
+                    function goToHome() {
+                        window.location.href = "index.html";
+                    }
+                </script>
+            </div>
+        </div>
+
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js">
+        </script>
+
+        <script>
+            (function ($) {
+                $.fn.timeline = function () {
+                    var selectors = {
+                        id: $(this),
+                        item: $(this).find(".item"),
+                        activeClass: "item--active",
+                        img: ".img"
+                    };
+
+                    // 将第一个时间轴项目激活，并设置时间轴背景图片为第一个项目的图片
+                    selectors.item.eq(0).addClass(selectors.activeClass);
+                    selectors.id.css(
+                        "background-image",
+                        "url(" +
+                        selectors.item
+                            .first()
+                            .find(selectors.img)
+                            .attr("src") +
+                        ")"
+                    );
+                    // 获取时间轴项目的总数
+                    var itemLength = selectors.item.length;
+                    // 当页面滚动时，触发滚动事件
+                    $(window).scroll(function () {
+                        var max, min;
+                        // 获取页面滚动的距离
+                        var pos = $(this).scrollTop();
+                        selectors.item.each(function (i) {
+                            // 获取当前时间轴项目的最小和最大高度
+                            min = $(this).offset().top;
+                            max = $(this).height() + $(this).offset().top;
+                            var that = $(this);
+                            // 如果滚动到最后一个项目，并且超过了当前项目高度的一半，
+                            // 则将最后一个项目设置为激活状态，并设置背景图片为最后一个项目的图片
+                            if (i == itemLength - 2 && pos > min + $(this).height() / 2) {
+                                selectors.item.removeClass(selectors.activeClass);
+                                selectors.id.css(
+                                    "background-image",
+                                    "url(" +
+                                    selectors.item
+                                        .last()
+                                        .find(selectors.img)
+                                        .attr("src") +
+                                    ")"
+                                );
+                                selectors.item.last().addClass(selectors.activeClass);
+                            }
+                            // 如果当前滚动位置在当前项目的最小和最大高度之间，
+                            // 则将当前项目设置为激活状态，并设置背景图片为当前项目的图片
+                            else if (pos <= max - 10 && pos >= min) {
+                                selectors.id.css(
+                                    "background-image",
+                                    "url(" +
+                                    $(this)
+                                        .find(selectors.img)
+                                        .attr("src") +
+                                    ")"
+                                );
+                                selectors.item.removeClass(selectors.activeClass);
+                                $(this).addClass(selectors.activeClass);
+                            }
+                        });
+                    });
+                };
+            })(jQuery)
+            /*
+            最后，我们调用 timeline 插件并传入时间轴的 ID 作为参数。
+            这将启用时间轴插件并为该时间轴绑定滚动事件。
+            */
+            $("#shell").timeline();
+        </script>
+</body>
+
+</html>

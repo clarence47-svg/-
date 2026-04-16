@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>飞天
+
+    </title>
+    <style>
+          .cta {
+  position: fixed;
+  bottom: 8%;
+  left:20px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  z-index: 1;
+}
+
+.cta button {
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.8);
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 50px;
+  height: 50px;
+  width: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s;
+  cursor: pointer;
+  transform: rotate(0deg);
+}
+
+.cta button:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+  color:rgb(53, 53, 53);
+}
+
+body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            filter: blur(10px); /* 模糊效果 */
+            z-index: -1; /* 背景层在最底层 */
+            transform: scale(1.1); /* 调整模糊边缘 */
+            background-image: var(--bg-image, none); /* 默认无背景 */
+        }
+
+        /* CSS部分 */
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-image: linear-gradient(-225deg, #FFE29F 0%, #FFA99F 48%, #FF719A 100%);
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        /* 设置滚动条 */
+        ::-webkit-scrollbar {
+            width: 1px;
+            height: 1px;
+        }
+
+        .images img {
+            border: #fff solid 5px;
+            max-width: 45vh;
+            max-height: 50vh;
+            transition: .5s;
+        }
+
+        .images:hover img {
+            box-shadow: 0 10px 30px #86c4f7;
+            transform: scale(1.05);
+        }
+
+        /* 创建一个水平滚动的包裹容器，用于展示内容 */
+        .shell {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100vh;
+            /*旋转90度，向上平移一个视口高度的距离 */
+            transform: rotate(-90deg) translate3d(0, -100vh, 0);
+            /* 设置变换的原点为右上角 */
+            transform-origin: right top;
+            overflow-x: hidden;
+            height: 100vw;
+            /* 设置3D透视效果 */
+            perspective: 1px;
+            transform-style: preserve-3d;
+        }
+
+        /* 创建一个图片容器，用于展示图片 */
+        .images {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* 设置最小高度为视口高度的40% */
+            min-height: 40vh;
+            /* 设置变换的原点为中心点 */
+            transform-origin: 50% 50%;
+            /* 旋转90度，向前平移0.1px，放大1.1倍，向右平移0px，向下平移2vh */
+            transform: rotate(90deg) translateZ(.1px) scale(1.1) translateX(0px) translateY(-5vh);
+            transition: 1s;
+        }
+
+        .slower {
+            transform: rotate(90deg) translateZ(-.12px) scale(1.3) translateX(0%) translateY(-15vh);
+        }
+
+        .slower1 {
+            transform: rotate(90deg) translateZ(-.25px) scale(1.35) translateX(0%) translateY(-10vh);
+        }
+
+        .slower-down {
+            transform: rotate(90deg) translateZ(-.1px) scale(1) translateX(0%) translateY(16vh);
+        }
+
+        .faster {
+            transform: rotate(90deg) translateZ(-.05px) scale(1.1) translateX(0%) translateY(15vh);
+        }
+
+        .faster1 {
+            transform: rotate(90deg) translateZ(.05px) scale(1.4) translateX(0%) translateY(0vh);
+        }
+
+        .fastest {
+            transform: rotate(90deg) translateZ(.22px) scale(0.7) translateX(-10vh) translateY(-15vh);
+        }
+
+        .vertical {
+            transform: rotate(90deg) translateZ(-.1px) scale(1.6) translateX(0%) translateY(-3vh);
+        }
+    </style>
+</head>
+<!-- HTML部分 -->
+
+<body>
+    <div class="shell">
+        <div class="images slower">
+            <img src="img/飞天/1.png">
+        </div>
+        <div class="images faster">
+            <img src="img/飞天/2.png">
+        </div>
+        <div class="images vertical">
+            <img src="img/飞天/3.png">
+        </div>
+        <div class="images slower-down">
+            <img src="img/飞天/4.png">
+        </div>
+        <div class="images">
+            <img src="img/飞天/5.png">
+        </div>
+        <div class="images slower">
+            <img src="img/飞天/6.png">
+        </div>
+        <div class="images faster1">
+            <img src="img/飞天/7.png">
+        </div>
+        <div class="images slower1">
+            <img src="img/飞天/8.png">
+        </div>
+        <div class="images">
+            <img src="img/飞天/9.png">
+        </div>
+        <div class="images slower">
+            <img src="img/飞天/10.png">
+        </div>
+        <div class="images faster">
+            <img src="img/飞天/11.png">
+        </div>
+        <div class="images vertical">
+            <img src="img/飞天/12.png">
+        </div>
+        <div class="images slower-down">
+            <img src="img/飞天/13.png">
+        </div>
+        <div class="images">
+            <img src="img/飞天/14.png">
+        </div>
+        <div class="images slower">
+            <img src="img/飞天/15.png">
+        </div>
+        <div class="images faster1">
+            <img src="img/飞天/16.png">
+        </div>
+        <div class="images slower1">
+            <img src="img/飞天/17.png">
+        </div>
+        <div class="images">
+            <img src="img/飞天/18.png">
+        </div>
+        <div class="images slower">
+            <img src="img/飞天/19.png">
+        </div>
+        <div class="images faster">
+            <img src="img/飞天/20.png">
+        </div>
+        <div class="images vertical">
+            <img src="img/飞天/21.png">
+        </div>
+        <div class="images slower-down">
+            <img src="img/飞天/22.png">
+        </div>
+        <div class="images">
+            <img src="img/飞天/23.png">
+        </div>
+        <div class="images slower">
+            <img src="img/飞天/24.png">
+        </div>
+        <div class="images faster1">
+            <img src="img/飞天/25.png">
+        </div>
+        <div class="images slower1">
+            <img src="img/飞天/26.png">
+        </div>
+        
+    </div>
+    <div class="cta">
+        <button onclick="window.location.href='色彩交融.html'">
+          返回上一页
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+      <script>
+        // 获取所有图片容器
+        const images = document.querySelectorAll('.images img');
+
+        // 设置初始背景为第一张图片
+        const defaultBgSrc = images[0].getAttribute('src');
+        document.body.style.setProperty('--bg-image', `url(${defaultBgSrc})`);
+
+        // 遍历每个图片容器，添加鼠标悬停事件
+        images.forEach(img => {
+            img.parentElement.addEventListener('mouseenter', () => {
+                // 获取当前图片的路径
+                const imgSrc = img.getAttribute('src');
+                // 更新背景图片
+                document.body.style.setProperty('--bg-image', `url(${imgSrc})`);
+            });
+        });
+    </script>
+</body>
+
+</html>
